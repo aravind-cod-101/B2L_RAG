@@ -25,16 +25,19 @@ embedding_model='nomic-embed-text'
 
 
 file_path = input('Enter the file path: ').strip()
-
+# data = []
 # Extract data from uploaded pdf
 if file_path and os.path.exists(file_path):
-    # loader = UnstructuredPDFLoader(file_path,strategy='hi_res')
+        loader = UnstructuredPDFLoader(file_path=file_path,strategy='hi_res')
+        data = loader.load()
+    # for f in os.listdir(file_path):
+    #     loader = UnstructuredPDFLoader(f'data/{f}',strategy='hi_res')
+    #     data.extend(loader.load())
     # loader = PDFPlumber Loader(file_path)
     # loader = PyMuPDFLoader(file_path)
-    # data = loader.load()
-    images = convert_from_path(file_path)
+    # images = convert_from_path(file_path)
     # print(data)
-    data = [Document(page_content=pytesseract.image_to_string(img)) for img in images]
+    # data = [Document(page_content=pytesseract.image_to_string(img)) for img in images]
     # reader = easyocr.Reader(['en'])
     # text = []
     # for img in convert_from_path(file_path):
@@ -43,8 +46,8 @@ if file_path and os.path.exists(file_path):
     #     text.append(page_text)
     # full_text = "\n\n".join(text)
     # data = Document(page_content=full_text)
-    print(data)
-    print('File Load Completed...')
+        print(data)
+        print('File Load Completed...')
 else:
     print("Upload a PDF file")
 
